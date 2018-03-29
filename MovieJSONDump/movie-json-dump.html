@@ -37,8 +37,13 @@
 
         // Here we construct our URL
         var queryURL = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
-       
-      
+        var queryObject = {
+          apikey: "trilogy",
+          plot: "short",
+          t: movie
+        }
+        var shorterUrl = "https://www.omdbapi.com/";
+
         // Write code between the dashes below to hit the queryURL with $ajax, then take the response data
         // and display it in the div with an id of movie-view
 
@@ -46,18 +51,25 @@
         // =================================================================
         
         
-        $.ajax ({
-          url: queryURL,
-          method: "GET"
-        }) .then(function(response) {
-          $("#movie-view").text(JSON.stringify(response));
+       // $.ajax ({
+       //   url: shorterUrl,
+       //   method: "GET",
+       //   data: queryObject
+       //   }) 
+          
+
+      $.get(shorterUrl, queryObject)
+      .then(function(response) {    
+       //  $("#movie-view").load(shorterUrl, queryObject) 
+       //  .then(function(response) {
+          $("#movie-view").text(JSON.stringify(response, "", 4));
         });
 
 
         // CODE GOES HERE
 
         // =================================================================
-      });
+        });
     </script>
   </div>
 </body>
